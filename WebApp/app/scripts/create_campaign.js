@@ -1,38 +1,38 @@
-// $(document).ready(function(){
-//     pageLoad();
-// });
+$(document).ready(function(){
+    pageLoad();
+});
 
-// function pageLoad() {
-//     $("#btnCreateCampaign").click(function(){
-//         validateCampaignName();
-//     });
-// }
+function pageLoad() {
+    $("#btnCreateCampaign").click(function(){
+        validateCampaignName();
+    });
+    $("#txtCampaignName").keyup(function(){
+        clearErrorMsg();
+    });
+}
 
-// function validateCampaignName() {
-//     var campaignName = $.trim($("#txtCampaignName").val());
-//     var errorMsg = "Please input campaign Name";
-    
-//     if (campaignName.length == 0 ) {
-//         campaignNameEmpty(errorMsg);
-//     } else {
-//         campaignNameCollect(campaignName);
-//     }
-// }
+function validateCampaignName() {
+    var campaignName = $.trim($("#txtCampaignName").val());
+    if (campaignName.length == 0 ) {
+        campaignNameEmpty();
+    } else {
+        campaignNameCollect();
+    }
+}
 
-// function campaignNameCollect(campaignName) {
-//     clearErrorMsg();
-//     alert("Campaign Name: " + campaignName);
-// } 
+function campaignNameEmpty() {
+    var errorMsg = "Please input campaign name";
+    $("#lblErrorCampaignName").html('').append(errorMsg);
+    $("#txtCampaignName").focus();
+} 
 
-// function campaignNameEmpty(errorMsg) {
-//     $("#lblErrorCampaignName").html('').append(errorMsg);
-//     $("#txtCampaignName").focus();
-// } 
+function campaignNameCollect() {
+    window.location.replace("../create_campaign_info.html");
+} 
 
-// function clearErrorMsg() {
-//     $("#lblErrorCampaignName").html('').append('');
-// }
-
+function clearErrorMsg(){
+    $("#lblErrorCampaignName").html('').append("");
+}
 
 // function validateCampaignName() {
 //     var txtCampaignName = $("#txtCampaignName").val();
