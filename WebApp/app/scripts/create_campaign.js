@@ -3,13 +3,18 @@ $(document).ready(function(){
 });
 
 function pageLoad() {
+    // $("#btnCreateCampaign").click(function(){
+    //     validateCampaignName();
+    // });
+    // $("#txtCampaignName").keyup(function(){
+    //     clearErrorMsg();
+    // });
+    var form = new AuthenticationForm();
     $("#btnCreateCampaign").click(function(){
-        validateCampaignName();
-    });
-    $("#txtCampaignName").keyup(function(){
-        clearErrorMsg();
+            form.create();
     });
 }
+
 
 function validateCampaignName() {
     var campaignName = $.trim($("#txtCampaignName").val());
@@ -34,6 +39,15 @@ function clearErrorMsg(){
     $("#lblErrorCampaignName").html('').append("");
 }
 
+
+var AuthenticationForm = function() {
+    this.txtCampaignName = $("#txtCampaignName").val();
+
+    this.create = function(){
+      this.lblErrorCampaignName = "Please input campaign name";
+      $("#lblErrorCampaignName").text(this.lblErrorCampaignName);
+    }
+  };
 // function validateCampaignName() {
 //     var txtCampaignName = $("#txtCampaignName").val();
 //     var errorMsg = "Please input campaign Name";

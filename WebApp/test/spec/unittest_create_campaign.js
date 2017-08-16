@@ -1,13 +1,4 @@
 
-var AuthenticationForm = function() {
-  this.txtCampaignName = $("#txtCampaignName").val();
-  this.create = function(){
-    this.lblErrorCampaignName = "Please input campaign name.";
-    $("#lblErrorCampaignName").text(this.lblErrorCampaignName);
-  }
-};
-
-
 describe("Validate campaign name", function() {
   
   
@@ -33,9 +24,10 @@ describe("Validate campaign name", function() {
 
   it("submit require campaign name", function() {
      authenticationForm.create();
-     expect(authenticationForm.lblErrorCampaignName).toEqual('Please input campaign name.');
-     expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name.');
+     expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
   });
+
+
 
 });
 
