@@ -51,7 +51,7 @@
         <h3 class="text-muted">WebApp</h3>
       </div> -->
 
-      <h4 class="header">Create Campaign</h4>
+      <h4 class="header">Create Campaign Info</h4>
 
       <form role="form">
         <div class="form-group">
@@ -65,9 +65,50 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-sm-4 col-form-label">
+                <label>Email Group</label>
+            </div>
+            <div class="col-sm-8">
+                <select id="ddlEmailGroup" type="select" class="form-control">
+                  <option value="1">LOV1</option>
+                  <option value="2">LOV2</option>
+                  <option value="3">LOV3</option>
+                </select>
+                <span id="lblErrorCampaignName" class="text-danger"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-form-label">
+                <label>Email Subject</label>
+            </div>
+            <div class="col-sm-8">
+                <input id="txtEmailSubject" type="text" class="form-control">
+                <span id="lblErrorEmailSubject" class="text-danger"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-form-label">
+                <label>From Name</label>
+            </div>
+            <div class="col-sm-8">
+                <input id="txtFrom Name" type="text" class="form-control">
+                <span id="lblErrorFromName" class="text-danger"></span>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-4 col-form-label">
+                  <label>From Email</label>
+              </div>
+              <div class="col-sm-8">
+                  <input id="txtFrom Email" type="text" class="form-control">
+                  <span id="lblErrorFromEmail" class="text-danger"></span>
+              </div>
+            </div>
+          <div class="row">
               <div class="col-sm-12">
                 <div class="float-right py-4">
-                  <button id="btnCreateCampaign" type="button" class="btn btn-lg btn-primary">Create</button>
+                  <button id="btnSaveCampaign" type="button" class="btn btn-lg btn-success">Save</button>
+                  <button id="btnCreateEmail" type="button" class="btn btn-lg btn-primary">Create Email</button>
                 </div>
               </div>
           </div>
@@ -111,7 +152,7 @@
     <!-- endbuild -->
     
     <!-- build:js scripts/main.js -->
-    <script src="scripts/create_campaign.js"></script>
+    <script src="scripts/create_campaign_info.js"></script>
     <!-- endbuild -->
   </body>
 </html>
