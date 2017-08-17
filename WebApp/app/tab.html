@@ -80,48 +80,7 @@ span.colInput {
 
         div.jHtmlArea { border: solid 1px #ccc; }
     </style>
-  <script type="text/javascript">
-    function submitForm()
-    {
-    var fromVal=document.forms["form1"]["from"].value;
-    var toVal=document.forms["form1"]["to"].value;
-    var subjectVal=document.forms["form1"]["subject"].value;
-    var bodyVal=document.forms["form1"]["emailBody"].value;
-
-    var result = true;
-
-clearErrorMessage();
-    if (fromVal==null || fromVal=="")
-      {
-      document.getElementById("fromError").innerHTML = "Please fill FROM value";
-      result = false;
-      }
-    if (toVal=="" || toVal==null)
-      {
-      document.getElementById("toError").innerHTML = "Please fill TO value";
-      result = false;
-      }
-    if (subjectVal==null || subjectVal=="")
-      {
-      document.getElementById("subjectError").innerHTML = "Please fill SUBJECT value";
-      result = false;
-      }
-
-    if (bodyVal==null || bodyVal=="")
-      {
-      document.getElementById("bodyError").innerHTML = "Please fill BODY value";
-      result = false;
-      }
-
-      if (result == true ) {
-      // TODO: Call backend sendMail
-      alert("Send mail success");
-      }
-      return result;
-
-    }
-
-    </script>
+  <script type="text/javascript" src="scripts/send_mail.js"></script>
 </head>
 <body>
 <!-- <form id="form1" name="form1"> -->
@@ -160,7 +119,7 @@ clearErrorMessage();
         // jHtmlArea.fn.defaultOptions.css = "jHtmlArea.Editor.css";
 
         $(function() {
-            //$("textarea").htmlarea(); // Initialize all TextArea's as jHtmlArea's with default values
+        alert("Test");
 
             $("#emailBody").htmlarea(); // Initialize jHtmlArea's with all default values
 
@@ -192,7 +151,7 @@ clearErrorMessage();
                     }),
 
                 // Specify a specific CSS file to use for the Editor
-                css: "style//jHtmlArea.Editor.css",
+                css: "styles//jHtmlArea.Editor.css",
 
                 // Do something once the editor has finished loading
                 loaded: function() {
@@ -204,7 +163,7 @@ clearErrorMessage();
         });
     </script>
 
-    <textarea id="emailBody" cols="80" rows="15" onchange="document.getElementById('bodyError').innerHTML = '';"><p><h3>Content Here!</h3></p></textarea>
+    <textarea id="emailBody" cols="80" rows="15" onchange="document.getElementById('bodyError').innerHTML = '';"></textarea>
       <span id="bodyError" style="color:red; font-size: 10%;"></span>
     <br />
     <input type="button" name="" value="Send" onclick= "submitForm();">
