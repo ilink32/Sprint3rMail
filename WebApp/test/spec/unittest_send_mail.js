@@ -1,6 +1,5 @@
 describe("CreateSendMailForm", function() {
-  //var form;
-  var rootId = 'testContainer';
+  //var rootId = 'testContainer';
   var formMarkup = '<form id="form1">'+
     '<input id="from" type="text" placeholder="">'+
     '<input id="to" type="text" placeholder="">'+
@@ -15,12 +14,6 @@ describe("CreateSendMailForm", function() {
 
   beforeEach(function() {
     $("body", document).append(formMarkup);
-//    var container = document.createElement('div');
-//    container.setAttribute('id',rootId);
-//    document.body.appendChild(container);
-//    container.innerHTML = formMarkup;
-//    console.log(container.innerHTML);
-    //form = new CreateSendMailForm();
   });
 
 
@@ -30,13 +23,26 @@ describe("CreateSendMailForm", function() {
     submitForm();
     // assertion
     expect($("#fromError").text()).toEqual('Please fill FROM value');
-//      form.to = "abc";
-//      form.subject = "xyz";
-//      form.emailBody = "content";
-//      form.btnSend.onClick = submitForm();
- //    expect($("#fromError").text()).toEqual('Please fill FROM value');
   });
 
+  it("should show TO error if to value is null", function() {
+    // assign
+    $("#from").value = "Test";
+    console.log($("#from").value)
+    // action
+    submitForm();
+    // assertion
+    expect($("#toError").text()).toEqual('Please fill TO value');
+  });
 
+  it("should show SUBJECT error if subject value is null", function() {
+    // assign
+    $("#from").value = "Test";
+    $("#to").value = "Test";
+    // action
+    submitForm();
+    // assertion
+    expect($("#subjectError").text()).toEqual('Please fill SUBJECT value');
+  });
 
 });
