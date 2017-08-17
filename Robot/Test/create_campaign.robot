@@ -20,7 +20,7 @@ Should be Open Browser
     ${options}=  Set Chrome Options
     ${options.set_binary}=  Set Variable  set_binary=${chrome_binary}
     Create WebDriver  Chrome  chrome_options=${options}
-    Go To    http://localhost:9000/create_campaign.html
+    Go To    http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com/create_campaign.html
 Create Correct Campaign
     Input Text      id=txtCampaignName  ${campaign_name}
     Click Element   id=btnCreateCampaign
