@@ -25,7 +25,6 @@ public class EmailController {
     }
 
     @RequestMapping(value = "/test/", params = {"fromEmail","toEmail", "subject","body"}, method = RequestMethod.GET)
-
     public String SendEmail(@RequestParam(value = "fromEmail") String fromEmail,@RequestParam(value = "toEmail") String toEmail,@RequestParam(value = "subject") String subject,@RequestParam(value = "body") String body ) {
         try {
             //sendEmail("<b>How are you?</b>");
@@ -37,7 +36,7 @@ public class EmailController {
     }
 
     @RequestMapping(value = "/send/",method = RequestMethod.POST)
-    public ResponseEntity<?> send(@RequestBody Email email, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<?> send(@RequestBody Email email) {
 
         try {
             MimeMessage message = sender.createMimeMessage();
@@ -53,7 +52,7 @@ public class EmailController {
             ex.printStackTrace();
         }
 
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok("200:OK");
     }
 
 

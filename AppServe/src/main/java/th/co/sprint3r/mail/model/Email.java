@@ -6,6 +6,9 @@ public class Email {
     String subject;
     String body;
 
+    public Email() {
+    }
+
     public Email(String fromEmail, String toEmail, String subject, String body) {
         this.fromEmail = fromEmail;
         this.toEmail = toEmail;
