@@ -23,22 +23,23 @@ public class EmailController {
         return "Hello api Email!!!";
     }
 
-    @RequestMapping(value = "/send/", params = {"toEmail", "subject","body"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/send/", params = {"fromEmail","toEmail", "subject","body"}, method = RequestMethod.GET)
 
-    public String SendEmail(@RequestParam(value = "toEmail") String toEmail,@RequestParam(value = "subject") String subject,@RequestParam(value = "body") String body ) {
+    public String SendEmail(@RequestParam(value = "fromEmail") String fromEmail,@RequestParam(value = "toEmail") String toEmail,@RequestParam(value = "subject") String subject,@RequestParam(value = "body") String body ) {
         try {
             //sendEmail("<b>How are you?</b>");
-            sendEmail(toEmail,subject,body);
+            sendEmail(fromEmail,toEmail,subject,body);
         } catch (Exception e){
             e.printStackTrace();
         }
         return "ok";
     }
 
-    private void sendEmail(String toEmail, String subject , String body) throws Exception{
+    private void sendEmail(String fromEmail,String toEmail, String subject , String body) throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
+        helper.setFrom(fromEmail,fromEmail);
         helper.setTo(toEmail);
         helper.setText(body, true);
         helper.setSubject(subject);
