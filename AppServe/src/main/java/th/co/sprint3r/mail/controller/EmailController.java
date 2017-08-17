@@ -1,12 +1,13 @@
 package th.co.sprint3r.mail.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import th.co.sprint3r.mail.model.Email;
 
 import javax.mail.internet.MimeMessage;
 
@@ -23,7 +24,7 @@ public class EmailController {
         return "Hello api Email!!!";
     }
 
-    @RequestMapping(value = "/send/", params = {"fromEmail","toEmail", "subject","body"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/test/", params = {"fromEmail","toEmail", "subject","body"}, method = RequestMethod.GET)
 
     public String SendEmail(@RequestParam(value = "fromEmail") String fromEmail,@RequestParam(value = "toEmail") String toEmail,@RequestParam(value = "subject") String subject,@RequestParam(value = "body") String body ) {
         try {
@@ -34,6 +35,12 @@ public class EmailController {
         }
         return "ok";
     }
+
+    @RequestMapping(value = "/send/",method = RequestMethod.POST)
+    public ResponseEntity<?> send(@RequestBody Email email, UriComponentsBuilder ucBuilder) {
+
+    }
+
 
     private void sendEmail(String fromEmail,String toEmail, String subject , String body) throws Exception{
         MimeMessage message = sender.createMimeMessage();
