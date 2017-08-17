@@ -36,4 +36,3 @@ describe("CreateCampaignForm", function() {
   });
 
 });
-

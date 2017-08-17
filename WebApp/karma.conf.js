@@ -3,6 +3,7 @@ module.exports = function(config) {
         files: [
           'bower_components/jquery/dist/jquery.js',
           'app/scripts/create_campaign.js',
+          'app/scripts/create_campaign_info.js',
           'app/scripts/send_mail.js',
           'test/spec/*.js'
         ],
