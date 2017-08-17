@@ -47,15 +47,17 @@ public class CampaignMasterController {
         return new ResponseEntity<List<CampaignMaster>>(resultList, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> insert(@RequestBody CampaignMaster campaignMaster, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = "/{campaignId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> update(@PathVariable long campaignId, @RequestBody CampaignMaster campaignMaster) {
 
-        long campaignId = campaignRepository.insert(campaignMaster);
-//        return campaignId;
+        long result = campaignRepository.update(campaignMaster);
 
-        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(ucBuilder.path("/campaignmaster/{campaignId}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        if (result != 1) {
+            return new ResponseEntity(new CustomErrorType("Unable to update campaignId " + campaignId + " cause campaignId not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<CampaignMaster>(campaignMaster, HttpStatus.OK);
     }
 }
 

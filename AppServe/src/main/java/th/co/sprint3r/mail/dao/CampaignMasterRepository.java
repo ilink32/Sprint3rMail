@@ -66,5 +66,22 @@ public class CampaignMasterRepository {
         return result;
     }
 
+    public long update(CampaignMaster campaignMaster) {
+        final String selectSql = "select update_campaign(?, ?, ?, ?, ?, ?) as campaign_id";
+
+        long result = jdbcTemplate.queryForObject(
+                selectSql, new Object[]{campaignMaster.getCampaignId(), campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()}, Long.class);
+
+        return result;
+    }
+
+    public boolean exists(CampaignMaster campaignMaster) {
+        final String selectSql = "select check_dup_campaign(?) as check_dup";
+
+        boolean result = jdbcTemplate.queryForObject(
+                selectSql, new Object[]{campaignMaster.getCampaignName()}, Boolean.class);
+
+        return result;
+    }
 }
 
