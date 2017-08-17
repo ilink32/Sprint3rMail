@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 AppServe/.idea/
 AppServe/target/
+Robot/Test/log.html
+Robot/Test/report.html
+Robot/Test/output.xml
+
