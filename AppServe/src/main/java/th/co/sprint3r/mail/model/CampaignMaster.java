@@ -4,16 +4,14 @@ import java.util.Date;
 
 public class CampaignMaster {
 
-    //    @Id
-//    @GeneratedValue(strategy= GenerationType.AUTO)
-    int campaignId;
-    String campaignName;
-    int emailGroup;
-    String emailSubject;
-    String fromName;
-    String fromEmail;
-    Date createDate;
-    Date changeDate;
+    private int campaignId;
+    private String campaignName;
+    private int emailGroup;
+    private String emailSubject;
+    private String fromName;
+    private String fromEmail;
+    private Date createDate;
+    private Date changeDate;
 
     public CampaignMaster() {
     }
