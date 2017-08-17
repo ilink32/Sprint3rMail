@@ -39,7 +39,7 @@ public class EmailController {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom(fromEmail,fromEmail);
+        helper.setFrom("sprint3rsmtp@gmail.com",fromEmail);
         helper.setTo(toEmail);
         helper.setText(body, true);
         helper.setSubject(subject);
