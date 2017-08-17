@@ -52,7 +52,7 @@ public class CampaignMasterController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> insert(@RequestBody CampaignMaster campaignMaster, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<List<CampaignMaster>> insert(@RequestBody CampaignMaster campaignMaster) {
         boolean exist = campaignRepository.exists(campaignMaster);
         System.out.println("campaignMaster "+campaignMaster.getCampaignName()+" --> exist = " + exist);
         if (exist) {
@@ -61,9 +61,8 @@ public class CampaignMasterController {
         }
         long campaignId = campaignRepository.insert(campaignMaster);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/campaignmaster/{campaignId}").buildAndExpand(campaignId).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        List<CampaignMaster> resultList = campaignRepository.listCampaign(campaignId);
+        return new ResponseEntity<List<CampaignMaster>>(resultList, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{campaignId}", method = RequestMethod.PUT)
