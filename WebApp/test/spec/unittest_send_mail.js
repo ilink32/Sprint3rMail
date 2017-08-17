@@ -16,6 +16,10 @@ describe("CreateSendMailForm", function() {
     $("body", document).append(formMarkup);
   });
 
+  afterEach(function() {
+    $("#form1").remove();
+  });
+
 
   it("should show FROM error if from value is null", function() {
     // assign
@@ -27,22 +31,33 @@ describe("CreateSendMailForm", function() {
 
   it("should show TO error if to value is null", function() {
     // assign
-    $("#from").value = "Test";
-    console.log($("#from").value)
+    $("#from").val("from email");
     // action
     submitForm();
     // assertion
+//    expect($("#toError").text()).toEqual('Please fill TO value');
     expect($("#toError").text()).toEqual('Please fill TO value');
   });
 
   it("should show SUBJECT error if subject value is null", function() {
     // assign
-    $("#from").value = "Test";
-    $("#to").value = "Test";
+    $("#from").val("from email");
+    $("#to").val("to email");
     // action
     submitForm();
     // assertion
     expect($("#subjectError").text()).toEqual('Please fill SUBJECT value');
+  });
+
+  it("should show BODY error if body value is null", function() {
+    // assign
+    $("#from").val("from email");
+    $("#to").val("to email");
+    $("#subject").val("subject email");
+    // action
+    submitForm();
+    // assertion
+    expect($("#bodyError").text()).toEqual('Please fill BODY value');
   });
 
 });
