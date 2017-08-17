@@ -3,17 +3,21 @@ describe("CreateCampaignForm", function() {
 
   var rootId = 'testContainer';
   var formMarkup = '<form>'+
-    '<input id="txtCampaignName" type="text" placeholder="" maxlength="50">'+
+    '<input id="txtCampaignName" type="text">'+
     '<button id="btnCreateCampaign" type="button" >Create</button>'+
     '<span id="lblErrorCampaignName"></span>'+
-    '</form>'
+    '</form>';
 
   beforeEach(function() {
-    var container = document.createElement('div');
-    container.setAttribute('id',rootId);
-    document.body.appendChild(container);
-    container.innerHTML = formMarkup;
+    var container  = $("<div>" + formMarkup + "</div>");  
+    $("body").append(container);
+    container.attr("id",rootId);
     form = new CreateCampaignForm();
+  });
+
+  afterEach(function(){
+    var container = $("#" + rootId);
+    container.remove();
   });
 
   it("Has blank campaign name initially", function() {
@@ -22,10 +26,14 @@ describe("CreateCampaignForm", function() {
 
   it("Create require campaign name", function() {
     form.create();
-     expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
+    expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
   });
 
-
+  it("Create correct campaign name", function() {
+    form.txtCampaignName = "New Campaign Name";
+    form.create();
+    expect($("#lblErrorCampaignName").text()).toEqual('');
+  });
 
 });
 
