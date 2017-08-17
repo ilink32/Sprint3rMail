@@ -1,1 +1,6 @@
-Example.class
+th/co/sprint3r/mail/Sprint3rMailService.class
+th/co/sprint3r/mail/dao/CampaignMasterRepository.class
+th/co/sprint3r/mail/dao/CampaignMasterRepository$1.class
+th/co/sprint3r/mail/controller/CampaignMasterController.class
+th/co/sprint3r/mail/model/CampaignMaster.class
+th/co/sprint3r/mail/dao/CampaignMasterRepository$CampaignMasterMapper.class

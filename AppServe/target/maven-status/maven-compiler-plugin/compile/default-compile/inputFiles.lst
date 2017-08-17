@@ -1,1 +1,4 @@
-/Users/odde/workspace/Sprint3rMail/AppServe/src/main/java/Example.java
+/Users/odde/workspace/Sprint3rMail/AppServe/src/main/java/th/co/sprint3r/mail/model/CampaignMaster.java
+/Users/odde/workspace/Sprint3rMail/AppServe/src/main/java/th/co/sprint3r/mail/Sprint3rMailService.java
+/Users/odde/workspace/Sprint3rMail/AppServe/src/main/java/th/co/sprint3r/mail/dao/CampaignMasterRepository.java
+/Users/odde/workspace/Sprint3rMail/AppServe/src/main/java/th/co/sprint3r/mail/controller/CampaignMasterController.java
