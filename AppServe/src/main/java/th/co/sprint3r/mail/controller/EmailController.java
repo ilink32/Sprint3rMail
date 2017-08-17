@@ -39,6 +39,21 @@ public class EmailController {
     @RequestMapping(value = "/send/",method = RequestMethod.POST)
     public ResponseEntity<?> send(@RequestBody Email email, UriComponentsBuilder ucBuilder) {
 
+        try {
+            MimeMessage message = sender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom("sprint3rsmtp@gmail.com",email.getFromEmail());
+            helper.setTo(email.getToEmail());
+            helper.setText(email.getBody(), true);
+            helper.setSubject(email.getSubject());
+
+            sender.send(message);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return ResponseEntity.ok("OK");
     }
 
 
