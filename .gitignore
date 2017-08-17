@@ -5,4 +5,5 @@ AppServe/target/
 Robot/Test/log.html
 Robot/Test/report.html
 Robot/Test/output.xml
+Robot/Test/*.png
 
