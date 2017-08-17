@@ -47,6 +47,19 @@ public class CampaignMasterController {
         return new ResponseEntity<List<CampaignMaster>>(resultList, HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> insert(@RequestBody CampaignMaster campaignMaster, UriComponentsBuilder ucBuilder) {
+        if (campaignRepository.exists(campaignMaster)) {
+            return new ResponseEntity(new CustomErrorType("Unable to create CampaignName " +
+                    campaignMaster.getCampaignName() + " already exist."), HttpStatus.CONFLICT);
+        }
+        long campaignId = campaignRepository.insert(campaignMaster);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/campaignmaster/{campaignId}").buildAndExpand(campaignId).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/{campaignId}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable long campaignId, @RequestBody CampaignMaster campaignMaster) {
 
