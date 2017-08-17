@@ -36,20 +36,34 @@ public class CampaignMasterRepository {
         }
     }
 
-    public List<CampaignMaster> listCampaign(long campaignId) {
+    public List<CampaignMaster> listAll() {
 
-        String selectSql = "select campaign_id, campaign_name, email_group, email_subject, from_name, from_email, create_date, change_date from campaign_master";
+        final String selectSql = "select campaign_id, campaign_name, email_group, email_subject, from_name, from_email, create_date, change_date from campaign_master";
 
-        if (campaignId > 0) {
-            selectSql = selectSql + " where campaign_id = " + campaignId;
-        }
-
-        List<CampaignMaster> result = jdbcTemplate.query(
-                selectSql,
-                new CampaignMasterMapper());
+        List<CampaignMaster> result = jdbcTemplate.query(selectSql, new CampaignMasterMapper());
 
         return result;
 
+    }
+
+    public List<CampaignMaster> listCampaign(long campaignId) {
+
+        final String selectSql = "select campaign_id, campaign_name, email_group, email_subject, from_name, from_email, create_date, change_date from campaign_master where campaign_id = ?";
+
+        List<CampaignMaster> result = jdbcTemplate.query(
+                selectSql, new Object[]{campaignId}, new CampaignMasterMapper());
+
+        return result;
+
+    }
+
+    public long insert(CampaignMaster campaignMaster) {
+        final String selectSql = "select add_campaign(?, ?, ?, ?, ?) as campaign_id";
+
+        long result = jdbcTemplate.queryForObject(
+                selectSql, new Object[]{campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()}, Long.class);
+
+        return result;
     }
 
 }
