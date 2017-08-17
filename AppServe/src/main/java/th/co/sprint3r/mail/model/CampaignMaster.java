@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CampaignMaster {
 
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy= GenerationType.AUTO)
     int campaignId;
     String campaignName;
@@ -15,7 +15,8 @@ public class CampaignMaster {
     Date createDate;
     Date changeDate;
 
-    public CampaignMaster(){}
+    public CampaignMaster() {
+    }
 
     public CampaignMaster(int campaignId,
                           String campaignName,
