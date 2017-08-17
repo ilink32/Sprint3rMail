@@ -117,9 +117,8 @@ span.colInput {
    <script type="text/javascript">
         // You can do this to perform a global override of any of the "default" options
         // jHtmlArea.fn.defaultOptions.css = "jHtmlArea.Editor.css";
-
+        //var $ = jQuery;
         $(function() {
-        alert("Test");
 
             $("#emailBody").htmlarea(); // Initialize jHtmlArea's with all default values
 
@@ -166,7 +165,7 @@ span.colInput {
     <textarea id="emailBody" cols="80" rows="15" onchange="document.getElementById('bodyError').innerHTML = '';"></textarea>
       <span id="bodyError" style="color:red; font-size: 10%;"></span>
     <br />
-    <input type="button" name="" value="Send" onclick= "submitForm();">
+    <input type="button" id="btnSend" name="btnSend" value="Send" onclick= "submitForm();">
   	</div>
   </p>
 </div>
