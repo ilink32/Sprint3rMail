@@ -31,6 +31,10 @@ public class CampaignMasterController {
 
         List<CampaignMaster> resultList = campaignRepository.listAll();
 
+        if (resultList.isEmpty()) {
+            return new ResponseEntity(new CustomErrorType("campaignmaster profile not found"), HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<List<CampaignMaster>>(resultList, HttpStatus.OK);
     }
 
@@ -40,8 +44,8 @@ public class CampaignMasterController {
         List<CampaignMaster> resultList = campaignRepository.listCampaign(campaignId);
 
         if (resultList.isEmpty()) {
-            return new ResponseEntity(new CustomErrorType("campaignId " + campaignId
-                    + " not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new CustomErrorType("campaignId \"" + campaignId
+                    + "\" not found"), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<List<CampaignMaster>>(resultList, HttpStatus.OK);
@@ -49,9 +53,11 @@ public class CampaignMasterController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> insert(@RequestBody CampaignMaster campaignMaster, UriComponentsBuilder ucBuilder) {
-        if (campaignRepository.exists(campaignMaster)) {
-            return new ResponseEntity(new CustomErrorType("Unable to create CampaignName " +
-                    campaignMaster.getCampaignName() + " already exist."), HttpStatus.CONFLICT);
+        boolean exist = campaignRepository.exists(campaignMaster);
+        System.out.println("campaignMaster "+campaignMaster.getCampaignName()+" --> exist = " + exist);
+        if (exist) {
+            return new ResponseEntity(new CustomErrorType("Unable to create campaignName \"" +
+                    campaignMaster.getCampaignName() + "\" already exist."), HttpStatus.CONFLICT);
         }
         long campaignId = campaignRepository.insert(campaignMaster);
 
@@ -66,7 +72,7 @@ public class CampaignMasterController {
         long result = campaignRepository.update(campaignMaster);
 
         if (result != 1) {
-            return new ResponseEntity(new CustomErrorType("Unable to update campaignId " + campaignId + " cause campaignId not found."),
+            return new ResponseEntity(new CustomErrorType("Unable to update campaignId \"" + campaignId + "\" cause campaignId not found."),
                     HttpStatus.NOT_FOUND);
         }
 
