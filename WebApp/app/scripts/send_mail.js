@@ -38,11 +38,11 @@ function submitForm()
       // TODO: Call backend sendMail
       alert('Sending');
       var data = [{
-          "fromEmail" : $('#from').val(),
-          "toEmail" : $('#to').val(),
-          "ccEmail" : $("#cc").val(),
-          "subject" : $('#subject').val(),
-          "body" : $('#emailBody').val()
+          'fromEmail' : $('#from').val(),
+          'toEmail' : $('#to').val(),
+          'ccEmail' : $('#cc').val(),
+          'subject' : $('#subject').val(),
+          'body' : $('#emailBody').val()
       }];
       console.log(data)
        $.ajax({
