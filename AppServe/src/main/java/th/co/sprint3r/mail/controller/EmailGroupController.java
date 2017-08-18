@@ -31,7 +31,7 @@ public class EmailGroupController {
         List<EmailGroup> resultList = emailGroupRepository.listAll();
 
         if (resultList.isEmpty()) {
-            return new ResponseEntity(new CustomErrorType("campaignmaster profile not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(CustomErrorType.emailGroupNotFoundAll().getErrorMessage(), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<List<EmailGroup>>(resultList, HttpStatus.OK);
@@ -43,11 +43,11 @@ public class EmailGroupController {
         List<EmailGroup> resultList = emailGroupRepository.listEmail(emailGroupId);
 
         if (resultList.isEmpty()) {
-            return new ResponseEntity(new CustomErrorType("emailGroupId \"" + emailGroupId
-                    + "\" not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(CustomErrorType.emailGroupNotFound(emailGroupId).getErrorMessage(), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<List<EmailGroup>>(resultList, HttpStatus.OK);
     }
+
 }
 

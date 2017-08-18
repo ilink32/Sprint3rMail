@@ -98,4 +98,5 @@ public class CampaignMaster {
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
+
 }

@@ -61,7 +61,7 @@ public class CampaignMasterRepository {
         final String selectSql = "select add_campaign(?, ?, ?, ?, ?) as campaign_id";
 
         long result = jdbcTemplate.queryForObject(
-                selectSql, new Object[]{campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()}, Long.class);
+                selectSql, getInsertObjects(campaignMaster), Long.class);
 
         return result;
     }
@@ -70,18 +70,30 @@ public class CampaignMasterRepository {
         final String selectSql = "select update_campaign(?, ?, ?, ?, ?, ?) as campaign_id";
 
         long result = jdbcTemplate.queryForObject(
-                selectSql, new Object[]{campaignMaster.getCampaignId(), campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()}, Long.class);
+                selectSql, getUpdateObjects(campaignMaster), Long.class);
 
         return result;
     }
 
     public boolean exists(CampaignMaster campaignMaster) {
-        final String selectSql = "select check_dup_campaign(?) as check_dup";
+        final String selectSql = "select check_dup_campaign(?, ?) as check_dup";
 
         boolean result = jdbcTemplate.queryForObject(
-                selectSql, new Object[]{campaignMaster.getCampaignName()}, Boolean.class);
+                selectSql, getExistsObjects(campaignMaster), Boolean.class);
 
         return result;
+    }
+
+    private Object[] getExistsObjects(CampaignMaster campaignMaster) {
+        return new Object[]{campaignMaster.getCampaignName(), campaignMaster.getCampaignId()};
+    }
+
+    private Object[] getInsertObjects(CampaignMaster campaignMaster) {
+        return new Object[]{campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()};
+    }
+
+    private Object[] getUpdateObjects(CampaignMaster campaignMaster) {
+        return new Object[]{campaignMaster.getCampaignId(), campaignMaster.getCampaignName(), campaignMaster.getEmailGroup(), campaignMaster.getEmailSubject(), campaignMaster.getFromName(), campaignMaster.getFromEmail()};
     }
 }
 
