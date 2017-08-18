@@ -9,12 +9,11 @@ import th.co.sprint3r.mail.model.Email;
 public class EmailRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
     public int insert(Email email){
 
-        String sql = "INSERT INTO send_history " +
-                "(send_from, send_to, send_subject, send_body, send_cc, send_time) VALUES (?, ?, ?, ?, ?, NOW())";
+        String sql = "INSERT INTO send_history (send_from, send_to, send_subject, send_body, send_cc, send_time) VALUES (?, ?, ?, ?, ?, NOW())";
 
         return jdbcTemplate.update(sql, new Object[] { email.getFromEmail(), email.getToEmail(), email.getSubject(), email.getBody(), email.getCcEmail()});
     }

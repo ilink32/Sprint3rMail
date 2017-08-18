@@ -17,25 +17,16 @@ import static org.junit.Assert.*;
 
 public class EmailControllerTest {
 
-    Email email = new Email("sprint3rmail", "sprint3rsmtp@gmail.com", "", "Subject", "Body");
+    private Email email = new Email("sprint3rmail", "sprint3rsmtp@gmail.com", "", "Subject", "Body");
 
     @Test
-    public void sendEmailCallOnce() throws Exception {
+    public void sendEmail() throws Exception {
         EmailController emailController = new EmailController();
         JavaMailSenderMock sender = new JavaMailSenderMock();
         emailController.sender = sender;
 
         emailController.sendEmail(email);
         sender.assertShouldCallSend(1);
-    }
-
-    @Test
-    public void sendEmailCCNotNull() throws Exception {
-        EmailController emailController = new EmailController();
-        JavaMailSenderMock sender = new JavaMailSenderMock();
-        emailController.sender = sender;
-
-        emailController.sendEmail(email);
     }
 
     private class JavaMailSenderMock extends JavaMailSenderImpl {
