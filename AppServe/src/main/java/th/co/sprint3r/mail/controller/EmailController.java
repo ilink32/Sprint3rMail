@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import th.co.sprint3r.mail.dao.EmailRepository;
 import th.co.sprint3r.mail.model.Email;
@@ -20,7 +18,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailController {
 
     @Autowired
-    private JavaMailSender sender;
+    JavaMailSender sender;
 
     @Autowired
     private EmailRepository emailRepository;
@@ -40,7 +38,7 @@ public class EmailController {
     }
 
 
-    private void sendEmail(Email email) throws Exception {
+    void sendEmail(Email email) throws Exception {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         boolean isHtml = true;
