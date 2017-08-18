@@ -3,15 +3,17 @@ package th.co.sprint3r.mail.model;
 public class Email {
     String fromEmail;
     String toEmail;
+    String ccEmail;
     String subject;
     String body;
 
     public Email() {
     }
 
-    public Email(String fromEmail, String toEmail, String subject, String body) {
+    public Email(String fromEmail, String toEmail, String ccEmail,String subject, String body) {
         this.fromEmail = fromEmail;
         this.toEmail = toEmail;
+        this.ccEmail = ccEmail;
         this.subject = subject;
         this.body = body;
     }
@@ -30,6 +32,14 @@ public class Email {
 
     public void setToEmail(String toEmail) {
         this.toEmail = toEmail;
+    }
+
+    public String getCcEmail() {
+        return ccEmail;
+    }
+
+    public void setCcEmail(String ccEmail) {
+        this.ccEmail = ccEmail;
     }
 
     public String getSubject() {
