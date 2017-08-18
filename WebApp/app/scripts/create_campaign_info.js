@@ -12,9 +12,22 @@ function pageLoad() {
         form.save("Y");
     });
 
+    $("#txtCampaignName").change(function(){
+        form.txtCampaignName = $.trim($("#txtCampaignName").val());
+    });
+    
+    $("#txtCampaignName").keyup(function(){
+        $("#lblErrorCampaignName").text('');
+    });
+
+    $("#ddlEmailGroup").change(function(){
+        $("#lblErrorEmailGroup").text('');
+    });
+
     $("#txtEmailSubject").change(function(){
         form.txtEmailSubject = $.trim($("#txtEmailSubject").val());
     });
+
     $("#txtEmailSubject").keyup(function(){
         $("#lblErrorEmailSubject").text('');
     });
@@ -35,55 +48,77 @@ function pageLoad() {
 }
 
 var CampaignInfoForm = function() {
-    var hasError = false;
-    this.txtCampaignName = $.trim($.urlParam('campaignName'));
-    // this.ddlEmailGroup = $.trim($("#ddlEmailGroup").val());
-    this.txtEmailSubject = $.trim($("#txtEmailSubject").val());
-    this.txtFromName = $.trim($("#txtFromName").val());
-    this.txtFromEmail = $.trim($("#txtFromEmail").val());
 
-    this.save = function(redirectFlag){
+   this.save = function(redirectFlag){
+        
+        this.txtCampaignName = $.trim($("#txtCampaignName").val());
+        this.ddlEmailGroup = $.trim($("#ddlEmailGroup").val());
+        this.txtEmailSubject = $.trim($("#txtEmailSubject").val());
+        this.txtFromName = $.trim($("#txtFromName").val());
+        this.txtFromEmail = $.trim($("#txtFromEmail").val());
 
-        if (this.txtCampaignName.length == 0){
-            this.lblErrorCampaignName = "Please input campaign name";
-            $("#lblErrorCampaignName").text(this.lblErrorCampaignName);
-            hasError = true;
+        if (this.isEmpty(this["txtCampaignName"])){
+            this.setErrorMsg("lblErrorCampaignName","Please input campaign name");
         } else {
-            this.lblErrorCampaignName = '';
-            $("#lblErrorCampaignName").text(this.lblErrorCampaignName);
+            this.clearErrorMsg("lblErrorCampaignName");
         } 
 
-        if (this.txtEmailSubject.length == 0){
-            this.lblErrorEmailSubject = "Please input email subject";
-            $("#lblErrorEmailSubject").text(this.lblErrorEmailSubject);
-            hasError = true;
+        if (this.isUnSelected(this["ddlEmailGroup"])){
+            this.setErrorMsg("lblErrorEmailGroup","Please Select Email Group");
         } else {
-            this.lblErrorEmailSubject = '';
-            $("#lblErrorEmailSubject").text(this.lblErrorEmailSubject);
+            this.clearErrorMsg("lblErrorEmailGroup");
         } 
 
-        if (this.txtFromName.length == 0){
-            this.lblErrorFromName = "Please input From Name";
-            $("#lblErrorFromName").text(this.lblErrorFromName);
-            hasError = true;
+        if (this.isEmpty(this["txtEmailSubject"])){
+            this.setErrorMsg("lblErrorEmailSubject","Please input email subject");
         } else {
-            this.lblErrorFromName = '';
-            $("#lblErrorFromName").text(this.lblErrorFromName);
+            this.clearErrorMsg("lblErrorEmailSubject");
         } 
 
-        if (this.txtFromEmail.length == 0){
-            this.lblErrorFromEmail = "Please input From Email";
-            $("#lblErrorFromEmail").text(this.lblErrorFromEmail);
-            hasError = true;
+        if (this.isEmpty(this["txtFromName"])){
+            this.setErrorMsg("lblErrorFromName","Please input From Name");
         } else {
-            this.lblErrorFromEmail = '';
-            $("#lblErrorFromEmail").text(this.lblErrorFromEmail);
+            this.clearErrorMsg("lblErrorFromName");
+        } 
+
+        if (this.isEmpty(this["txtFromEmail"])){
+            this.setErrorMsg("lblErrorFromEmail","Please input From Email");
+        } else {
+            this.clearErrorMsg("lblErrorFromEmail");
         }
 
-        if(hasError == false){
+        if (!this.hasError()) {
             saveCampaignName(redirectFlag);
         }
 
+    }
+
+    this.isEmpty = function(field){
+        return (field.length == 0);
+    }
+
+    this.isUnSelected = function(field){
+        return (field == 0);
+    }
+
+    this.clearErrorMsg = function(fieldName){
+        this.fieldName = '';
+        $("#" + fieldName).text(this.fieldName);
+    }
+
+    this.setErrorMsg = function(fieldName, errorMsg){
+        this.fieldName = errorMsg;
+        $("#" + fieldName).text(this.fieldName);
+    }
+
+    this.hasError = function(){
+        var fields = ['txtCampaignName','txtEmailSubject','txtFromName','txtFromEmail'];
+        var hasError;
+        var self = this;
+        fields.forEach( function(field,fields){
+            hasError = hasError || self.isEmpty(self[field]);
+        });
+        return hasError || self.isUnSelected(self['ddlEmailGroup']);
     }
 };
 
@@ -119,6 +154,8 @@ function saveCampaignName(redirectFlag) {
     });
 
     function successHandler(data, status, jqXHR) {
+        alert("Create Campaign Success");
+        console.log("success");
         if (redirectFlag=="Y") 
             window.location.replace("../send_mail.html?campaignId=" + data[0].campaignId);
     }

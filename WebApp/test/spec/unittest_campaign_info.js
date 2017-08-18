@@ -6,8 +6,9 @@ describe("CampaignInfoForm", function() {
     '<input id="txtCampaignName" type="text">'+
     '<span id="lblErrorCampaignName"></span>'+
     '<select id="ddlEmailGroup" type="select" class="form-control">'+
-    '<option value="1">Please Select</option>'+
-    '<option value="2">Customer1</option>'+
+    '<option value="0">Please Select</option>' +
+    '<option value="1">Customer Group</option>'+
+    '<option value="1">Employee Group</option>'+
     '</select>'+
     '<span id="lblErrorEmailGroup"></span>'+
     '<input id="txtEmailSubject" type="text">'+
