@@ -50,6 +50,11 @@ describe("CampaignInfoForm", function() {
     expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
   });
 
+  it("Save require email group", function() {
+    form.save();
+    expect($("#lblErrorEmailGroup").text()).toEqual('Please select email group');
+  });
+
   it("Save require email subject", function() {
     form.save();
     expect($("#lblErrorEmailSubject").text()).toEqual('Please input email subject');

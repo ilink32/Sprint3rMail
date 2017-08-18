@@ -29,10 +29,10 @@ describe("CreateCampaignForm", function() {
     expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
   });
 
-  it("Create correct campaign name", function() {
-    form.txtCampaignName = "New Campaign Name";
-    form.create();
-    expect($("#lblErrorCampaignName").text()).toEqual('');
-  });
+  // it("Create correct campaign name", function() {
+  //   form.txtCampaignName = "New Campaign Name";
+  //   form.create();
+  //   expect($("#lblErrorCampaignName").text()).toEqual('');
+  // });
 
 });

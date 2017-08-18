@@ -64,7 +64,7 @@ var CampaignInfoForm = function() {
         } 
 
         if (this.isUnSelected(this["ddlEmailGroup"])){
-            this.setErrorMsg("lblErrorEmailGroup","Please Select Email Group");
+            this.setErrorMsg("lblErrorEmailGroup","Please select email group");
         } else {
             this.clearErrorMsg("lblErrorEmailGroup");
         } 
