@@ -6,11 +6,10 @@ function pageLoad() {
     var form = new CampaignInfoForm();
     $("#txtCampaignName").val($.urlParam('campaignName'));
     $("#btnSaveCampaign").click(function(){
-        form.create();
+        form.save("N");
     });
     $("#btnCreateEmail").click(function(){
-        form.create();
-        window.location.replace("../send_mail.html");
+        form.save("Y");
     });
 
     $("#txtEmailSubject").change(function(){
@@ -38,12 +37,13 @@ function pageLoad() {
 var CampaignInfoForm = function() {
     var hasError = false;
     this.txtCampaignName = $.trim($.urlParam('campaignName'));
+    // this.ddlEmailGroup = $.trim($("#ddlEmailGroup").val());
     this.txtEmailSubject = $.trim($("#txtEmailSubject").val());
     this.txtFromName = $.trim($("#txtFromName").val());
     this.txtFromEmail = $.trim($("#txtFromEmail").val());
-    //this.ddlEmailGroup = 
 
-    this.create = function(){
+    this.save = function(redirectFlag){
+
         if (this.txtCampaignName.length == 0){
             this.lblErrorCampaignName = "Please input campaign name";
             $("#lblErrorCampaignName").text(this.lblErrorCampaignName);
@@ -81,7 +81,7 @@ var CampaignInfoForm = function() {
         }
 
         if(hasError == false){
-            saveCampaignName();
+            saveCampaignName(redirectFlag);
         }
 
     }
@@ -97,32 +97,33 @@ $.urlParam = function(name){
     }
 }
 
-function saveCampaignName(data) {
+function saveCampaignName(redirectFlag) {
 
-    data = [{
+    var data = {
         "campaignName": $("#txtCampaignName").val(),
         "emailGroup": $("#ddlEmailGroup").val(),
         "emailSubject": $("#txtEmailSubject").val(),
         "fromName": $("#txtFromName").val(),
         "fromEmail": $("#txtFromEmail").val()
-    }];
+    };
 
-    console.log(data);
+    $.ajax({
+        type: "POST",
+        url: "http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/campaignmaster",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        crossDomain: true,
+        dataType: "json",
+        success: successHandler,
+        error: errorHandler
+    });
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: "http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/campaignmaster",
-    //     data: JSON.stringify(data),
-    //     contentType: "application/json; charset=utf-8",
-    //     crossDomain: true,
-    //     dataType: "json",
-    //     success: function (data, status, jqXHR) {
-    //         alert("success");
-    //     },
+    function successHandler(data, status, jqXHR) {
+        if (redirectFlag=="Y") 
+            window.location.replace("../send_mail.html?campaignId=" + data[0].campaignId);
+    }
 
-    //     error: function (jqXHR, status) {
-    //         console.log(jqXHR);
-    //         alert('fail' + status.code);
-    //     }
-    // });
+    function errorHandler(jqXHR, status) {
+        alert(jqXHR.responseText);
+    }
 }

@@ -44,23 +44,23 @@ describe("CampaignInfoForm", function() {
   //   expect(form.txtFromEmail).toEqual('');
   // });
   
-  // it("Save require campaign name", function() {
-  //   form.create();
-  //   expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
-  // });
+  it("Save require campaign name", function() {
+    form.save();
+    expect($("#lblErrorCampaignName").text()).toEqual('Please input campaign name');
+  });
 
   it("Save require email subject", function() {
-    form.create();
+    form.save();
     expect($("#lblErrorEmailSubject").text()).toEqual('Please input email subject');
   });
 
   it("Save require From Name", function() {
-    form.create();
+    form.save();
     expect($("#lblErrorFromName").text()).toEqual('Please input From Name');
   });
 
   it("Save require From Email", function() {
-    form.create();
+    form.save();
     expect($("#lblErrorFromEmail").text()).toEqual('Please input From Email');
   });
 
