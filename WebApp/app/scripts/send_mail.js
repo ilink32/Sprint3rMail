@@ -36,7 +36,31 @@ function submitForm()
 
     if (result == true ) {
       // TODO: Call backend sendMail
-      alert('Send mail success');
+      alert('Sending');
+      var data = [{
+          "fromEmail" : $('#from').val(),
+          "toEmail" : $('#to').val(),
+          "ccEmail" : $("#cc").val(),
+          "subject" : $('#subject').val(),
+          "body" : $('#emailBody').val()
+      }];
+      console.log(data)
+       $.ajax({
+           type: 'POST',
+           url: 'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/email/send/',
+           data: JSON.stringify(data),
+           contentType: 'application/json; charset=utf-8',
+           crossDomain: true,
+           dataType: 'json',
+           success: function (data, status, jqXHR) {
+               alert('Send mail success');
+           },
+
+           error: function (jqXHR, status) {
+               console.log(jqXHR);
+               alert('Send mail fail' + status.code);
+           }
+       });
     }
     return result;
 
