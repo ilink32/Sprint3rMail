@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import th.co.sprint3r.mail.dao.EmailRepository;
 import th.co.sprint3r.mail.model.Email;
 
 import javax.mail.internet.MimeMessage;
@@ -21,11 +22,16 @@ public class EmailController {
     @Autowired
     private JavaMailSender sender;
 
+    @Autowired
+    private EmailRepository emailRepository;
+
     @RequestMapping(value = "/sendemail/",method = RequestMethod.POST)
     public ResponseEntity<?> send(@RequestBody Email email) {
 
         try {
             sendEmail(email);
+            emailRepository.insert(email);
+
         } catch (Exception ex){
             return new ResponseEntity(new CustomErrorType(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
