@@ -35,8 +35,6 @@ function submitForm()
     }
 
   if (result == true ) {
-    // TODO: Call backend sendMail
-    alert('Sending');
     var data = {
         'fromEmail' : $('#from').val(),
         'toEmail' : $('#to').val(),
@@ -47,7 +45,7 @@ function submitForm()
     console.log(data)
      $.ajax({
          type: 'POST',
-         url: 'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/email/send/',
+         url: 'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/email/sendemail/',
          data: JSON.stringify(data),
          contentType: 'application/json; charset=utf-8',
          crossDomain: true,
@@ -76,36 +74,26 @@ $.urlParam = function(name){
     }
 }
 
-var CampaignInfo = function(name){
-     $.ajax({
-         type: 'GET',
-         url: 'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/campaignmaster/' + $.urlParam(name),
-         crossDomain: true,
-         success: function (response) {
-             //response = JSON.stringify(response);
-             var responseData = JSON.parse(response);
-             console.log(response);
-         },
+function CampaignInfo(){
+console.log("Get Campaign Info");
 
-//         error: function (jqXHR, status) {
-//             console.log(jqXHR);
-//             alert('Send mail fail' + status.code);
-//
-//         }
-     });
+  $.getJSON(
+    'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/campaignmaster/' + $.urlParam('campaignId'),
+    '',
+    function (response) {
+         //response = JSON.stringify(response);
+         console.log(response);
+        $("#from").val(response[0]['fromEmail']);
+        $("#to").val(response[0]['emailGroup']);
+        $("#subject").val(response[0]['emailSubject']);
 
+     }
+  );
 }
 
-var SendMailForm = function() {
-    var hasError = false;
-    //var campaignInfo = $.trim($.urlParam('campaignId'));
-    var campaignInfo = CampaignInfo('campaignId');
-    //this.txtCampaignName = $.trim($.urlParam('campaignId'));
-    // this.ddlEmailGroup = $.trim($("#ddlEmailGroup").val());
-    this.from = campaignInfo['fromEmail'];
-    this.to = campaignInfo['emailGroup'];
-    this.subject = campaignInfo['emailSubject'];
-}
+$(function(){
+  CampaignInfo();
+});
 
 function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
@@ -123,7 +111,7 @@ function openCity(evt, cityName) {
 
 // You can do this to perform a global override of any of the "default" options
         // jHtmlArea.fn.defaultOptions.css = "jHtmlArea.Editor.css";
-        $(function() {
+$(function() {
 
             $('#emailBody').htmlarea(); // Initialize jHtmlArea's with all default values
 
