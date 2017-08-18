@@ -13,6 +13,7 @@ import th.co.sprint3r.mail.model.CampaignMaster;
 import javax.sql.DataSource;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/campaignmaster")
 public class CampaignMasterController {

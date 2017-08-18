@@ -11,6 +11,7 @@ import th.co.sprint3r.mail.model.Email;
 
 import javax.mail.internet.MimeMessage;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/email")
 public class EmailController {
