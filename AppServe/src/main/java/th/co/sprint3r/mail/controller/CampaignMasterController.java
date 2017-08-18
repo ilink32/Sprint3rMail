@@ -51,7 +51,7 @@ public class CampaignMasterController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<List<CampaignMaster>> insert(@RequestBody CampaignMaster campaignMaster) {
-        boolean exist = campaignRepository.exists(campaignMaster);
+        boolean exist = campaignRepository.existsInsert(campaignMaster);
         if (exist) {
             return new ResponseEntity(CustomErrorType.campaignInsertDuplicate(campaignMaster).getErrorMessage(), HttpStatus.CONFLICT);
         }
@@ -63,7 +63,7 @@ public class CampaignMasterController {
 
     @RequestMapping(value = "/{campaignId}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable long campaignId, @RequestBody CampaignMaster campaignMaster) {
-        boolean exist = campaignRepository.exists(campaignMaster);
+        boolean exist = campaignRepository.existsUpdate(campaignMaster);
         if (exist) {
             return new ResponseEntity(CustomErrorType.campaignUpdateDuplicate(campaignMaster).getErrorMessage(), HttpStatus.CONFLICT);
         }

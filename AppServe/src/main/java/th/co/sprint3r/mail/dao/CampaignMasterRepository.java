@@ -75,16 +75,29 @@ public class CampaignMasterRepository {
         return result;
     }
 
-    public boolean exists(CampaignMaster campaignMaster) {
+    public boolean existsInsert(CampaignMaster campaignMaster) {
         final String selectSql = "select check_dup_campaign(?, ?) as check_dup";
 
         boolean result = jdbcTemplate.queryForObject(
-                selectSql, getExistsObjects(campaignMaster), Boolean.class);
+                selectSql, getExistsInsertObjects(campaignMaster), Boolean.class);
 
         return result;
     }
 
-    private Object[] getExistsObjects(CampaignMaster campaignMaster) {
+    public boolean existsUpdate(CampaignMaster campaignMaster) {
+        final String selectSql = "select check_dup_campaign(?, ?) as check_dup";
+
+        boolean result = jdbcTemplate.queryForObject(
+                selectSql, getExistsUpdateObjects(campaignMaster), Boolean.class);
+
+        return result;
+    }
+
+    private Object[] getExistsInsertObjects(CampaignMaster campaignMaster) {
+        return new Object[]{campaignMaster.getCampaignName(), null};
+    }
+
+    private Object[] getExistsUpdateObjects(CampaignMaster campaignMaster) {
         return new Object[]{campaignMaster.getCampaignName(), campaignMaster.getCampaignId()};
     }
 
