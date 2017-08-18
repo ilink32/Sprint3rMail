@@ -49,14 +49,13 @@ function submitForm()
          data: JSON.stringify(data),
          contentType: 'application/json; charset=utf-8',
          crossDomain: true,
-         dataType: 'json',
          success: function (data, status, jqXHR) {
              alert('Send mail success');
          },
 
          error: function (jqXHR, status) {
              console.log(jqXHR);
-             alert('Send mail fail' + status.code);
+             alert('Send mail fail ' + status);
          }
      });
   }
@@ -75,7 +74,7 @@ $.urlParam = function(name){
 }
 
 function CampaignInfo(){
-console.log("Get Campaign Info");
+console.log('Get Campaign Info');
 
   $.getJSON(
     'http://ec2-52-77-254-50.ap-southeast-1.compute.amazonaws.com:8090/campaignmaster/' + $.urlParam('campaignId'),
@@ -83,9 +82,9 @@ console.log("Get Campaign Info");
     function (response) {
          //response = JSON.stringify(response);
          console.log(response);
-        $("#from").val(response[0]['fromEmail']);
-        $("#to").val(response[0]['emailGroup']);
-        $("#subject").val(response[0]['emailSubject']);
+        $('#from').val(response[0]['fromEmail']);
+        $('#to').val(response[0]['emailGroup']);
+        $('#subject').val(response[0]['emailSubject']);
 
      }
   );
