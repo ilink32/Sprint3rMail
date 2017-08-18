@@ -11,6 +11,7 @@ import th.co.sprint3r.mail.model.EmailGroup;
 import javax.sql.DataSource;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/emailgroup")
 public class EmailGroupController {
