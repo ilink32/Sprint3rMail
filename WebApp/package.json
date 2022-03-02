@@ -27,7 +27,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.0.0",
     "jasmine-core": "^2.7.0",
-    "karma": "^1.7.0",
+    "karma": "^6.3.16",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
     "main-bower-files": "^2.5.0",
